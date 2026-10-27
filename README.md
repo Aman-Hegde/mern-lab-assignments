@@ -2,6 +2,16 @@
 
 This folder contains two independent college lab applications. Run each application from its own folder.
 
+## Application Screenshots
+
+### Task 1 — StockFlow Inventory Dashboard
+
+![StockFlow CRUD Dashboard](screenshots/task1-crud.png)
+
+### Task 2 — JoinSpace Signup Page
+
+![JoinSpace Signup Page](screenshots/task2-signup.png)
+
 ## Prerequisites
 
 - Node.js 20.19 or newer (or Node.js 22.12 or newer) and npm
