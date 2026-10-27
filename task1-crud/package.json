@@ -1,0 +1,14 @@
+{
+  "name": "task1-crud",
+  "version": "1.0.0",
+  "description": "CRUD operations on a server-side array using Express and vanilla JavaScript",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
