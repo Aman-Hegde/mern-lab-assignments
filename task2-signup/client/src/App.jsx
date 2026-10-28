@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const LOCAL_API_URL = "http://localhost:5000";
+const PRODUCTION_API_URL = "https://joinspace-api-aman.onrender.com";
+const isLocalDevelopment = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+const defaultApiUrl = isLocalDevelopment ? LOCAL_API_URL : PRODUCTION_API_URL;
+const API_URL = (import.meta.env.VITE_API_URL || defaultApiUrl).replace(/\/+$/, "");
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function App() {
