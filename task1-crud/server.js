@@ -1,9 +1,20 @@
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const NETLIFY_FRONTEND_URL = "https://peaceful-mermaid-56add3.netlify.app";
 
+app.use(cors({
+  origin: [
+    NETLIFY_FRONTEND_URL,
+    /^https?:\/\/localhost(?::\d+)?$/,
+    /^https?:\/\/127\.0\.0\.1(?::\d+)?$/,
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 

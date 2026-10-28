@@ -8,6 +8,14 @@ const productList = document.getElementById("product-list");
 const message = document.getElementById("message");
 const productCount = document.getElementById("product-count");
 
+const RENDER_API_URL = "https://stockflow-api-aman.onrender.com";
+const isLocalDevelopment = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+const API_BASE_URL = isLocalDevelopment ? "" : RENDER_API_URL;
+
+function apiUrl(path) {
+  return `${API_BASE_URL}${path}`;
+}
+
 function showMessage(text, type = "success") {
   message.textContent = text;
   message.className = `message ${type}`;
@@ -59,7 +67,7 @@ function renderProducts(items) {
 
 async function loadProducts() {
   try {
-    const response = await fetch("/api/items");
+    const response = await fetch(apiUrl("/api/items"));
     if (!response.ok) throw new Error("Could not load products.");
     renderProducts(await response.json());
   } catch (error) {
@@ -81,7 +89,7 @@ async function deleteProduct(id) {
   if (!window.confirm("Are you sure you want to delete this product?")) return;
 
   try {
-    const response = await fetch(`/api/items/${id}`, { method: "DELETE" });
+    const response = await fetch(apiUrl(`/api/items/${id}`), { method: "DELETE" });
     const result = await response.json();
     if (!response.ok) throw new Error(result.message || "Could not delete product.");
     if (idInput.value === String(id)) resetForm();
@@ -104,7 +112,7 @@ form.addEventListener("submit", async (event) => {
 
   submitButton.disabled = true;
   try {
-    const response = await fetch(id ? `/api/items/${id}` : "/api/items", {
+    const response = await fetch(apiUrl(id ? `/api/items/${id}` : "/api/items"), {
       method: id ? "PUT" : "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
